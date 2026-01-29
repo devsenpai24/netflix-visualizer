@@ -3,14 +3,10 @@ import matplotlib.pyplot as plt
 
 df=pd.read_csv('netflix_titles.csv')
 
-# ===============================
-# 1. CLEAN DATA
-# ===============================
+
 df = df.dropna(subset=['type', 'release_year', 'rating', 'country', 'duration'])
 
-# ===============================
-# 2. MOVIES VS TV SHOWS COUNT
-# ===============================
+
 type_counts = df['type'].value_counts()
 plt.figure(figsize=(6,4))
 plt.bar(type_counts.index, type_counts.values, color=['skyblue', 'orange'])
@@ -21,9 +17,7 @@ plt.tight_layout()
 plt.savefig('movies_vs_tvshows.png')
 plt.show()
 
-# ===============================
-# 3. CONTENT RATINGS DISTRIBUTION (Pie Chart)
-# ===============================
+
 rating_counts = df['rating'].value_counts()
 plt.figure(figsize=(8,6))
 plt.pie(rating_counts, labels=rating_counts.index,
@@ -33,9 +27,7 @@ plt.tight_layout()
 plt.savefig('content_ratings_pie.png')
 plt.show()
 
-# ===============================
-# 4. MOVIE DURATION DISTRIBUTION
-# ===============================
+
 movie_df = df[df['type'] == 'Movie'].copy()
 movie_df['duration_int'] = movie_df['duration'].str.replace(' min','').astype(int)
 
@@ -48,9 +40,7 @@ plt.tight_layout()
 plt.savefig('movie_duration_histogram.png')
 plt.show()
 
-# ===============================
-# 5. RELEASE YEAR VS NUMBER OF SHOWS
-# ===============================
+
 release_counts = df['release_year'].value_counts().sort_index()
 plt.figure(figsize=(10,6))
 plt.scatter(release_counts.index, release_counts.values, color='red')
